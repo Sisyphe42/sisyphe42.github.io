@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>222 Words</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="word-display-wrapper">
+            <div class="word-display" id="wordDisplay">
+                <span id="wordContent"></span>
+                <span id="cursor"></span>
+                <div class="search-input-wrapper" id="searchInputWrapper">
+                    <input type="text" id="searchInput" placeholder="" autocomplete="off" spellcheck="false">
+                    <span id="inputCursor"></span>
+                </div>
+            </div>
+            <button class="search-toggle-btn" id="searchToggleBtn" title="展开/折叠搜索结果">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"/>
+                </svg>
+            </button>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+
+        <div class="main-area">
+            <div class="controls-sidebar collapsed" id="controlsSidebar">
+                <div class="top-buttons">
+                    <button class="toggle-btn" id="toggleBtn" title="展开/折叠设置">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+                        </svg>
+                    </button>
+                    <button class="toggle-btn play-pause-btn" id="playPauseBtn" title="暂停/启动">
+                        <svg id="playIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="6" y="4" width="4" height="16"/>
+                            <rect x="14" y="4" width="4" height="16"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="controls-content" id="controlsContent">
+                    <div class="control-item">
+                        <label for="typingSpeed">输入速度</label>
+                        <div class="slider-wrapper">
+                            <input id="typingSpeed" type="range" min="80" max="520" step="10" value="300">
+                            <output id="typingSpeedValue">300ms</output>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label for="deleteSpeed">删除速度</label>
+                        <div class="slider-wrapper">
+                            <input id="deleteSpeed" type="range" min="60" max="420" step="10" value="200">
+                            <output id="deleteSpeedValue">200ms</output>
+                        </div>
+                    </div>
+                    <div class="control-item">
+                        <label for="pauseDelay">停顿时间</label>
+                        <div class="slider-wrapper">
+                            <input id="pauseDelay" type="range" min="100" max="1500" step="50" value="700">
+                            <output id="pauseDelayValue">700ms</output>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="keyboard-wrapper">
+                <div class="keyboard-frame">
+                    <div class="keyboard-body">
+                        <div class="keyboard-row">
+                            <div class="key key-long" data-key="escape">Esc</div>
+                            <div class="key key-round" data-key="1">1</div>
+                            <div class="key key-round" data-key="2">2</div>
+                            <div class="key key-round" data-key="3">3</div>
+                            <div class="key key-round" data-key="4">4</div>
+                            <div class="key key-round" data-key="5">5</div>
+                            <div class="key key-round" data-key="6">6</div>
+                            <div class="key key-round" data-key="7">7</div>
+                            <div class="key key-round" data-key="8">8</div>
+                            <div class="key key-round" data-key="9">9</div>
+                            <div class="key key-round" data-key="0">0</div>
+                            <div class="key key-round" data-key="-">-</div>
+                            <div class="key key-round" data-key="=">=</div>
+                            <div class="key key-long" data-key="backspace">Backspace</div>
+                        </div>
+                        <div class="keyboard-row">
+                            <div class="key key-tab" data-key="tab">Tab</div>
+                            <div class="key" data-key="q">Q</div>
+                            <div class="key" data-key="w">W</div>
+                            <div class="key" data-key="e">E</div>
+                            <div class="key" data-key="r">R</div>
+                            <div class="key" data-key="t">T</div>
+                            <div class="key" data-key="y">Y</div>
+                            <div class="key" data-key="u">U</div>
+                            <div class="key" data-key="i">I</div>
+                            <div class="key" data-key="o">O</div>
+                            <div class="key" data-key="p">P</div>
+                            <div class="key key-round" data-key="[">[</div>
+                            <div class="key key-round" data-key="]">]</div>
+                            <div class="key key-round" data-key="\\">\</div>
+                        </div>
+                        <div class="keyboard-row">
+                            <div class="key key-caps" data-key="capslock">Caps</div>
+                            <div class="key" data-key="a">A</div>
+                            <div class="key" data-key="s">S</div>
+                            <div class="key" data-key="d">D</div>
+                            <div class="key" data-key="f">F</div>
+                            <div class="key" data-key="g">G</div>
+                            <div class="key" data-key="h">H</div>
+                            <div class="key" data-key="j">J</div>
+                            <div class="key" data-key="k">K</div>
+                            <div class="key" data-key="l">L</div>
+                            <div class="key key-round" data-key=";">;</div>
+                            <div class="key key-round" data-key="'">'</div>
+                            <div class="key key-enter" data-key="enter">Enter</div>
+                        </div>
+                        <div class="keyboard-row">
+                            <div class="key key-shift left" data-key="shift">Shift</div>
+                            <div class="key" data-key="z">Z</div>
+                            <div class="key" data-key="x">X</div>
+                            <div class="key" data-key="c">C</div>
+                            <div class="key" data-key="v">V</div>
+                            <div class="key" data-key="b">B</div>
+                            <div class="key" data-key="n">N</div>
+                            <div class="key" data-key="m">M</div>
+                            <div class="key key-round" data-key=",">,</div>
+                            <div class="key key-round" data-key=".">.</div>
+                            <div class="key key-round" data-key="/">/</div>
+                            <div class="key key-shift right" data-key="shiftright">Shift</div>
+                        </div>
+                        <div class="keyboard-row">
+                            <div class="key key-fn" data-key="fn">Fn</div>
+                            <div class="key key-control" data-key="control">Control</div>
+                            <div class="key key-alt" data-key="alt">Option</div>
+                            <div class="key key-space" data-key="space">Space</div>
+                            <div class="key key-alt" data-key="alt">Option</div>
+                            <div class="key key-control" data-key="control">Control</div>
+                        </div>
+                    </div>
+                    <div class="keyboard-cable"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info" id="info"></div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="keyboard.js"></script>
+</body>
+</html>
